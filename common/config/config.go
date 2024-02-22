@@ -10,6 +10,8 @@ import（
 type config struct {
 	// Add your configuration fields here
 	Server server 	`yaml:"server"`
+	Db db `yaml:"db"`
+	
 	// Mysql mysql 	`yaml:"mysql"`
 	// Redis redis 	`yaml:"redis"`
 }
@@ -17,6 +19,19 @@ type config struct {
 type server struct {
 	Address string `yaml:"address"`
 	Model string `yaml:"model"`
+}
+
+// 数据库配置
+type db struct {
+	Dialects string `yaml:"dialects"`
+	Host string `yaml:"host"`
+	Port string `yaml:"port"`
+	Db string `yaml:"db"`
+	Username string `yaml:"username"`
+	Password string `yaml:"password"`
+	Charset string `yaml:"charset"`
+	MaxIdle int `yaml:"max_idle"`
+	MaxOpen int `yaml:"max_open"`
 }
 
 var Config *config

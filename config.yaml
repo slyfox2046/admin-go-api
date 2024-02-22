@@ -5,3 +5,18 @@ server:
   model: debug
   # release模式
   # model: release
+
+
+# 数据库配置
+db:
+  dialects: mysql
+  host: 127.0.0.1
+  port: 3306
+  db: admin-go-api
+  username: root
+  password: 123456
+  charset: uft8
+  # 最大空闲数
+  maxIdle: 50
+  # 最大连接数
+  maxOpen: 150

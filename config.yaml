@@ -20,3 +20,8 @@ db:
   maxIdle: 50
   # 最大连接数
   maxOpen: 150
+
+# redis配置
+redis:
+  address: 127.0.0.1:6379
+  password: 123456

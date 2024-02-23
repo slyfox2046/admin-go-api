@@ -11,6 +11,7 @@ type config struct {
 	// Add your configuration fields here
 	Server server 	`yaml:"server"`
 	Db db `yaml:"db"`
+	Redis redis `yaml:"redis"`
 	
 	// Mysql mysql 	`yaml:"mysql"`
 	// Redis redis 	`yaml:"redis"`
@@ -32,6 +33,13 @@ type db struct {
 	Charset string `yaml:"charset"`
 	MaxIdle int `yaml:"max_idle"`
 	MaxOpen int `yaml:"max_open"`
+}
+
+// redis配置
+type redis struct {
+	Addr string `yaml:"address"`
+	Password string `yaml:"password"`
+
 }
 
 var Config *config

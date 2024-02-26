@@ -12,6 +12,8 @@ type config struct {
 	Server server 	`yaml:"server"`
 	Db db `yaml:"db"`
 	Redis redis `yaml:"redis"`
+	ImageSettings imageSettings `yaml:"imageSettings"`
+
 	
 	// Mysql mysql 	`yaml:"mysql"`
 	// Redis redis 	`yaml:"redis"`
@@ -41,6 +43,14 @@ type redis struct {
 	Password string `yaml:"password"`
 
 }
+
+// imageSettings图片上传配置
+type imageSettings struct {
+	UploadDir string `yaml:"upload_dir"`
+	ImageHost string `yaml:"image_host"`
+}
+
+
 
 var Config *config
 

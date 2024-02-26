@@ -1,9 +1,9 @@
 // 文件配置 
 package config
 
-import（
-"gopkg.in/yaml.v2"
-"io/ioutil"
+import (
+	"gopkg.in/yaml.v2"
+	"io/ioutil"
 )
 
 // 总配置文件

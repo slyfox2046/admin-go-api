@@ -13,7 +13,7 @@ type config struct {
 	Db db `yaml:"db"`
 	Redis redis `yaml:"redis"`
 	ImageSettings imageSettings `yaml:"imageSettings"`
-
+	Log log `yaml:"log"`
 	
 	// Mysql mysql 	`yaml:"mysql"`
 	// Redis redis 	`yaml:"redis"`
@@ -50,7 +50,12 @@ type imageSettings struct {
 	ImageHost string `yaml:"image_host"`
 }
 
-
+// log日志配置
+type log struct {
+	Path string `yaml:"path"`
+	Name string `yaml:"name"`
+	Model string `yaml:"model"`
+}
 
 var Config *config
 

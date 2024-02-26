@@ -33,3 +33,11 @@ imageSettings:
   # 本地ip地址
   imageHost: http://localhost:2002
 
+# log日志配置
+log:
+  path: ./log
+  name: sys
+  # 输出到控制台
+  model: console
+  # 输出到文件
+  # model: file

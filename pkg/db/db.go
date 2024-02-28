@@ -4,6 +4,7 @@ import (
 	"admin-go-api/common/config"
 	"fmt"
 
+
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -15,13 +16,19 @@ var Db *gorm.DB
 func SetupDBLink() error {
 	var err error
 	var dbConfig = config.Config.Db
-	url := fmt.Sprintln("$s:$s@tcp:(%s:%d)/%s?charset=%s&parseTime=True&loc=Local",
+	// url:= "root:123456@tcp(127.0.0.1:3306)/admin-go-api?charset=utf8mb4&parseTime=True&loc=Local"
+	url := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=%s&parseTime=True&loc=Local",
 		dbConfig.Username,
 		dbConfig.Password,
 		dbConfig.Host,
 		dbConfig.Port,
 		dbConfig.Db,
 		dbConfig.Charset)
+
+		fmt.Println("----------------------------------------------------------------")
+		fmt.Println(url)
+		fmt.Println("----------------------------------------------------------------")
+
 
 	Db, err = gorm.Open(mysql.Open(url), &gorm.Config{
 		Logger:                                   logger.Default.LogMode(logger.Info),

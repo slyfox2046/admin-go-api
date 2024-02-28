@@ -2,7 +2,7 @@
 package router
 
 import (
-	"admin-go-ap/common/config"
+	"admin-go-api/common/config"
 	"admin-go-api/middleware"
 	"net/http"
 

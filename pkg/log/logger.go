@@ -1,7 +1,7 @@
 package log
 
 import (
-	"admin-api-go/common/config"
+	"admin-go-api/common/config"
 	"os"
 	"path/filepath"
 	"time"
@@ -23,7 +23,7 @@ func setLogFile(file string) {
 
 // 初始化
 func init() {
-	setLogFile(filepath.Join(config.Config.Log.Path, config.Config.log.Name))
+	setLogFile(filepath.Join(config.Config.Log.Path, config.Config.Log.Name))
 }
 
 // 方法调用
@@ -34,7 +34,7 @@ func Log() *logrus.Logger {
 		if log == nil {
 			log = logrus.New()
 			log.Out = os.Stdout
-			log.Formatter = &logrus.JSONFormatter{TimestampFormatter: "2008-01-01 15:04:05"}
+			log.Formatter = &logrus.JSONFormatter{TimestampFormat: "2008-01-01 15:04:05"}
 			log.SetLevel(logrus.DebugLevel)
 		}
 	}
@@ -55,7 +55,7 @@ func logFile() *logrus.Logger {
 			// 设置日志切割时间间隔（1天）
 			rotatelogs.WithRotationTime(24*time.Hour),
 		)
-		writeMap := lfshook.writeMap{
+		writeMap := lfshook.WriterMap{
 			logrus.InfoLevel:  logWriter,
 			logrus.FatalLevel: logWriter,
 			logrus.DebugLevel: logWriter,

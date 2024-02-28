@@ -3,7 +3,7 @@
 package middleware
 
 import (
-	"admin-api-go/pkg/log"
+	"admin-go-api/pkg/log"
 	"io/ioutil"
 	"time"
 
@@ -21,23 +21,22 @@ func Logger() gin.HandlerFunc {
 		reqMethod := c.Request.Method
 		reqUri := c.Request.RequestURI
 		header := c.Request.Header
-		proto:=c.Request.Proto
-		statusCode:=c.Writer.Status()
+		proto := c.Request.Proto
+		statusCode := c.Writer.Status()
 		clientIP := c.ClientIP()
-		err:=c.Err()
+		err := c.Err()
 
-		body,_:= ioutil.ReadAll(c.Request.Body)
-		logger.WriteField(logrus.Fields{
-			"status_code":statusCode,
-			"latency_time":latencyTime,
-			"client_ip":clientIP,
-			"req_method":reqMethod,
-			"req_uri":reqUri,
-			"header":header,
-			"proto":proto,
-			"err":err,
-			"body":body,
+		body, _ := ioutil.ReadAll(c.Request.Body)
+		logger.WithFields(logrus.Fields{
+			"status_code":  statusCode,
+			"latency_time": latencyTime,
+			"client_ip":    clientIP,
+			"req_method":   reqMethod,
+			"req_uri":      reqUri,
+			"header":       header,
+			"proto":        proto,
+			"err":          err,
+			"body":         body,
 		}).Info()
-
 	}
 }

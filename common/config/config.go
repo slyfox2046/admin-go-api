@@ -28,7 +28,7 @@ type server struct {
 type db struct {
 	Dialects string `yaml:"dialects"`
 	Host string `yaml:"host"`
-	Port string `yaml:"port"`
+	Port int `yaml:"port"`
 	Db string `yaml:"db"`
 	Username string `yaml:"username"`
 	Password string `yaml:"password"`
@@ -39,7 +39,7 @@ type db struct {
 
 // redis配置
 type redis struct {
-	Addr string `yaml:"address"`
+	Address string `yaml:"address"`
 	Password string `yaml:"password"`
 
 }
@@ -61,7 +61,7 @@ var Config *config
 
 // 配置初始化
 func init(){
-	ymalFile, err :=ioutil.ReadFile("./confog.yaml")
+	ymalFile, err :=ioutil.ReadFile("./config.yaml")
 		// 有错就down机
 		if err!=nil {
 			panic(err)

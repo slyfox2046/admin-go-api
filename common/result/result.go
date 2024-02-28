@@ -22,7 +22,7 @@ func Success(c *gin.Context, data interface{}) {
 
 	res := Result{}
 	res.Code = int(ApiCode.SUCCESS)
-	res.Message = ApiCode.getMessage(ApiCode.SUCCESS)
+	res.Message = ApiCode.GetMessage(ApiCode.SUCCESS)
 	res.Data = data
 	c.JSON(http.StatusOK, res)
 }

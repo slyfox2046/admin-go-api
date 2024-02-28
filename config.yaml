@@ -15,7 +15,7 @@ db:
   db: admin-go-api
   username: root
   password: 123456
-  charset: uft8
+  charset: utf8mb4
   # 最大空闲数
   maxIdle: 50
   # 最大连接数
@@ -24,7 +24,8 @@ db:
 # redis配置
 redis:
   address: 127.0.0.1:6379
-  password: 123456
+  # password: 123456
+  password:
 
 # 图片地址和IP
 imageSettings: 

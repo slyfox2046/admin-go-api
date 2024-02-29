@@ -7,6 +7,8 @@ import (
 	"admin-go-api/common/config"
 	"admin-go-api/pkg/log"
 	"admin-go-api/router"
+	 _ "admin-go-api/docs"
+
 	"context"
 	"net/http"
 	"os"
@@ -15,6 +17,14 @@ import (
 
 	"github.com/gin-gonic/gin"
 )
+
+
+// @title 通用后台管理系统
+// @version 1.0
+// @description 后台管理系统API接口文档
+// @securityDefinitions.apiKey ApiKeyAuth
+// @in header
+// @name Authorization
 
 func main() {
 	// 加载日志log

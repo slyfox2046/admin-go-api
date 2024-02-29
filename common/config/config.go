@@ -46,8 +46,8 @@ type redis struct {
 
 // imageSettings图片上传配置
 type imageSettings struct {
-	UploadDir string `yaml:"upload_dir"`
-	ImageHost string `yaml:"image_host"`
+	UploadDir string `yaml:"uploadDir"`
+	ImageHost string `yaml:"imageHost"`
 }
 
 // log日志配置

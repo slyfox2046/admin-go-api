@@ -12,11 +12,16 @@ import (
 type ISysPostService interface {
  CreateSysPost( c *gin.Context,sysPost entity.SysPost)
  GetSysPostList(c *gin.Context, PageNum, PageSize int, PostName, PostStatus, BeginTime, EndTime string)
+ GetSysPostById(c *gin.Context, Id int) 
 }
 
 type SysPostServiceImpl struct {
 }
 
+// 根据id查询岗位
+func (s SysPostServiceImpl) GetSysPostById(c *gin.Context, Id int) {
+	result.Success(c, dao.GetSysPostById(Id))
+}
 
 // 分页查询岗位列表
 func (s SysPostServiceImpl) GetSysPostList(c *gin.Context, PageNum, PageSize int, PostName, PostStatus, BeginTime, EndTime string) {
@@ -46,3 +51,4 @@ var sysPostService = SysPostServiceImpl{}  //创建岗位对象
 func SysPostService() ISysPostService {
 	return &sysPostService
 }
+

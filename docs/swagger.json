@@ -83,6 +83,37 @@
                 }
             }
         },
+        "/api/post/info": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据id查询岗位",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "根据id查询岗位",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
         "/api/post/list": {
             "get": {
                 "security": [

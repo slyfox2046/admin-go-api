@@ -31,8 +31,14 @@ func register(router *gin.Engine) {
 	router.GET("/api/captcha", controller.Captcha)
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	router.POST("/api/login", controller.Login)
+
 	router.POST("/api/post/add", controller.CreateSysPost)
 	router.GET("/api/post/list", controller.GetSysPostList)
 	router.GET("/api/post/info", controller.GetSysPostById)
+	router.PUT("/post/update", controller.UpdateSysPost)
+	router.DELETE("/post/delete", controller.DeleteSysPostById)
+	router.DELETE("/post/batch/delete", controller.BatchDeleteSysPost)
+	router.PUT("/post/updateStatus", controller.UpdateSysPostStatus)
+	router.GET("/post/vo/list", controller.QuerySysPostVoList)
 
 }

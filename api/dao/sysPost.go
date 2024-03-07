@@ -68,3 +68,40 @@ func GetSysPostById(Id int) (sysPost entity.SysPost) {
 	Db.First(&sysPost, Id)
 	return sysPost
 }
+
+// UpdateSysPost 修改岗位
+func UpdateSysPost(post entity.SysPost) (sysPost entity.SysPost) {
+	Db.First(&sysPost, post.ID)
+	sysPost.PostName = post.PostName
+	sysPost.PostCode = post.PostCode
+	sysPost.PostStatus = post.PostStatus
+	if post.Remark != "" {
+		sysPost.Remark = post.Remark
+	}
+	Db.Save(&sysPost)
+	return sysPost
+}
+
+// DeleteSysPostById 根据id删除岗位
+func DeleteSysPostById(dto entity.SysPostIdDto) {
+	Db.Delete(&entity.SysPost{}, dto.Id)
+}
+
+// BatchDeleteSysPost 批量删除岗位
+func BatchDeleteSysPost(dto entity.DelSysPostDto) {
+	Db.Where("id in (?)", dto.Ids).Delete(&entity.SysPost{})
+}
+
+// UpdateSysPostStatus 修改状态
+func UpdateSysPostStatus(dto entity.UpdateSysPostStatusDto) {
+	var sysPost entity.SysPost
+	Db.First(&sysPost, dto.Id)
+	sysPost.PostStatus = dto.PostStatus
+	Db.Save(&sysPost)
+}
+
+// QuerySysPostVoList 岗位下拉列表
+func QuerySysPostVoList() (sysPostVo []entity.SysPostVo) {
+	Db.Table("sys_post").Select("id, post_name").Scan(&sysPostVo)
+	return sysPostVo
+}

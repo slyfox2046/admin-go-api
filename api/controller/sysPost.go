@@ -6,10 +6,8 @@ package controller
 import (
 	"admin-go-api/api/entity"
 	"admin-go-api/api/service"
-
-	"strconv"
-
 	"github.com/gin-gonic/gin"
+	"strconv"
 )
 
 var sysPost entity.SysPost
@@ -60,4 +58,70 @@ func GetSysPostList(c *gin.Context) {
 func GetSysPostById(c *gin.Context) {
 	Id, _ := strconv.Atoi(c.Query("id"))
 	service.SysPostService().GetSysPostById(c, Id)
+}
+
+// UpdateSysPost 修改岗位
+// @Summary 修改岗位接口
+// @Produce json
+// @Description 修改岗位接口
+// @Param data body entity.SysPost true "data"
+// @Success 200 {object} result.Result
+// @router /api/post/update [put]
+// @Security ApiKeyAuth
+func UpdateSysPost(c *gin.Context) {
+	_ = c.BindJSON(&sysPost)
+	service.SysPostService().UpdateSysPost(c, sysPost)
+}
+
+// DeleteSysPostById 根据id删除岗位
+// @Summary 根据id删除岗位接口
+// @Produce json
+// @Description 根据id删除岗位接口
+// @Param data body entity.SysPostIdDto true "data"
+// @Success 200 {object} result.Result
+// @router /api/post/delete [delete]
+// @Security ApiKeyAuth
+func DeleteSysPostById(c *gin.Context) {
+	var dto entity.SysPostIdDto
+	_ = c.BindJSON(&dto)
+	service.SysPostService().DeleteSysPostById(c, dto)
+}
+
+// BatchDeleteSysPost 批量删除岗位
+// @Summary 批量删除岗位接口
+// @Produce json
+// @Description 批量删除岗位接口
+// @Param data body entity.DelSysPostDto true "data"
+// @Success 200 {object} result.Result
+// @router /api/post/batch/delete [delete]
+// @Security ApiKeyAuth
+func BatchDeleteSysPost(c *gin.Context) {
+	var dto entity.DelSysPostDto
+	_ = c.BindJSON(&dto)
+	service.SysPostService().BatchDeleteSysPost(c, dto)
+}
+
+// UpdateSysPostStatus 岗位状态修改
+// @Summary 岗位状态修改接口
+// @Produce json
+// @Description 岗位状态修改接口
+// @Param data body entity.UpdateSysPostStatusDto true "data"
+// @Success 200 {object} result.Result
+// @router /api/post/updateStatus [put]
+// @Security ApiKeyAuth
+func UpdateSysPostStatus(c *gin.Context) {
+	var dto entity.UpdateSysPostStatusDto
+	_ = c.BindJSON(&dto)
+	service.SysPostService().UpdateSysPostStatus(c, dto)
+}
+
+// QuerySysPostVoList 岗位下拉列表
+// @Summary 岗位下拉列表
+// @Produce json
+// @Description 岗位下拉列表
+// @Success 200 {object} result.Result
+// @router /api/post/vo/list [get]
+// @Security ApiKeyAuth
+func QuerySysPostVoList(c *gin.Context) {
+	service.SysPostService().QuerySysPostVoList(c)
 }

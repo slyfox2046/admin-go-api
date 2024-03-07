@@ -1,4 +1,12 @@
 definitions:
+  entity.DelSysPostDto:
+    properties:
+      ids:
+        description: Id列表
+        items:
+          type: integer
+        type: array
+    type: object
   entity.LoginDto:
     properties:
       idKey:
@@ -42,6 +50,21 @@ definitions:
       remark:
         description: 备注
         type: string
+    type: object
+  entity.SysPostIdDto:
+    properties:
+      id:
+        description: ID
+        type: integer
+    type: object
+  entity.UpdateSysPostStatusDto:
+    properties:
+      id:
+        description: ID
+        type: integer
+      postStatus:
+        description: 状态（1->正常 2->停用）
+        type: integer
     type: object
   result.Result:
     properties:
@@ -112,6 +135,46 @@ paths:
             $ref: '#/definitions/result.Result'
       security:
       - ApiKeyAuth: []
+  /api/post/batch/delete:
+    delete:
+      description: 批量删除岗位接口
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.DelSysPostDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      security:
+      - ApiKeyAuth: []
+      summary: 批量删除岗位接口
+  /api/post/delete:
+    delete:
+      description: 根据id删除岗位接口
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.SysPostIdDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      security:
+      - ApiKeyAuth: []
+      summary: 根据id删除岗位接口
   /api/post/info:
     get:
       description: 根据id查询岗位
@@ -169,6 +232,59 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: 分页查询岗位列表
+  /api/post/update:
+    put:
+      description: 修改岗位接口
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.SysPost'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      security:
+      - ApiKeyAuth: []
+      summary: 修改岗位接口
+  /api/post/updateStatus:
+    put:
+      description: 岗位状态修改接口
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.UpdateSysPostStatusDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      security:
+      - ApiKeyAuth: []
+      summary: 岗位状态修改接口
+  /api/post/vo/list:
+    get:
+      description: 岗位下拉列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      security:
+      - ApiKeyAuth: []
+      summary: 岗位下拉列表
 securityDefinitions:
   ApiKeyAuth:
     in: header

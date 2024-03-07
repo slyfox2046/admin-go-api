@@ -19,3 +19,24 @@ func (SysPost) TableName() string {
 	return "sys_post"
 }
 
+// Id参数
+type SysPostIdDto struct {
+	Id uint `json:"id"` // ID
+}
+
+// 删除岗位参数
+type DelSysPostDto struct {
+	Ids []uint // Id列表
+}
+
+// 修改状态参数
+type UpdateSysPostStatusDto struct {
+	Id         int // ID
+	PostStatus int // 状态（1->正常 2->停用）
+}
+
+// 岗位下拉列表对象模型
+type SysPostVo struct {
+	Id       int    `json:"id"`       // ID
+	PostName string `json:"postName"` // 岗位名称
+}

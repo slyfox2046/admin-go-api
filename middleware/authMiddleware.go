@@ -24,7 +24,7 @@ func AuthMiddleware() func(c *gin.Context) {
 		}
 		// todo 检验token
 		var token = "token"
-		c.Set(constant.ContextkeyUserObj, token)
+		c.Set(constant.ContextKeyUserObj, token)
 		c.Next()
 	}
 }

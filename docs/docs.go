@@ -31,9 +31,65 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/api/login": {
+            "post": {
+                "description": "用户登录接口",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.LoginDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "entity.LoginDto": {
+            "type": "object",
+            "required": [
+                "idKey",
+                "image",
+                "password",
+                "username"
+            ],
+            "properties": {
+                "idKey": {
+                    "description": "uuid",
+                    "type": "string"
+                },
+                "image": {
+                    "description": "验证码",
+                    "type": "string",
+                    "maxLength": 6,
+                    "minLength": 4
+                },
+                "password": {
+                    "description": "密码",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "用户名",
+                    "type": "string"
+                }
+            }
+        },
         "result.Result": {
             "type": "object",
             "properties": {
@@ -70,8 +126,8 @@ var SwaggerInfo = &swag.Spec{
 	Description:      "后台管理系统API接口文档",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
-	// LeftDelim:        "{{",
-	// RightDelim:       "}}",
+	LeftDelim:        "{{",
+	RightDelim:       "}}",
 }
 
 func init() {

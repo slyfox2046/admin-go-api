@@ -3,7 +3,7 @@ package db
 import (
 	"admin-go-api/common/config"
 	"fmt"
-
+	"admin-go-api/api/entity"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -40,7 +40,10 @@ func SetupDBLink() error {
 	if Db.Error	!= nil {
 		panic(Db.Error)
 	}
-	sqlDB, err := Db.DB()
+	// 迁移 schema
+	Db.AutoMigrate(&entity.SysAdmin{})
+
+	sqlDB, _ := Db.DB()
 	sqlDB.SetMaxIdleConns(dbConfig.MaxIdle)
 	sqlDB.SetMaxOpenConns(dbConfig.MaxOpen)
 

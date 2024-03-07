@@ -11,9 +11,23 @@ import (
 
 type ISysPostService interface {
  CreateSysPost( c *gin.Context,sysPost entity.SysPost)
+ GetSysPostList(c *gin.Context, PageNum, PageSize int, PostName, PostStatus, BeginTime, EndTime string)
 }
 
 type SysPostServiceImpl struct {
+}
+
+
+// 分页查询岗位列表
+func (s SysPostServiceImpl) GetSysPostList(c *gin.Context, PageNum, PageSize int, PostName, PostStatus, BeginTime, EndTime string) {
+	if PageSize < 1 {
+		PageSize = 10
+	}
+	if PageNum < 1 {
+		PageNum = 1
+	}
+	sysPost, count := dao.GetSysPostList(PageNum, PageSize, PostName, PostStatus, BeginTime, EndTime)
+	result.Success(c, map[string]interface{}{"total": count, "pageSize": PageSize, "pageNum": PageNum, "list": sysPost})
 }
 
 

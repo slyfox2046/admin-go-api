@@ -21,6 +21,28 @@ definitions:
     - password
     - username
     type: object
+  entity.SysPost:
+    properties:
+      createTime:
+        allOf:
+        - $ref: '#/definitions/util.HTime'
+        description: 创建时间
+      id:
+        description: ID
+        type: integer
+      postCode:
+        description: 岗位编码
+        type: string
+      postName:
+        description: 岗位名称
+        type: string
+      postStatus:
+        description: 状态（1->正常 2->停用）
+        type: integer
+      remark:
+        description: 备注
+        type: string
+    type: object
   result.Result:
     properties:
       code:
@@ -30,6 +52,11 @@ definitions:
         description: 返回数据
       message:
         description: 提示信息
+        type: string
+    type: object
+  util.HTime:
+    properties:
+      time.Time:
         type: string
     type: object
 info:
@@ -66,6 +93,25 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/result.Result'
+  /api/post/add:
+    post:
+      description: 新增岗位接口
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.SysPost'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      security:
+      - ApiKeyAuth: []
 securityDefinitions:
   ApiKeyAuth:
     in: header

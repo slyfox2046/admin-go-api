@@ -42,6 +42,7 @@ func SetupDBLink() error {
 	}
 	// 迁移 schema
 	Db.AutoMigrate(&entity.SysAdmin{})
+	Db.AutoMigrate(&entity.SysPost{})
 
 	sqlDB, _ := Db.DB()
 	sqlDB.SetMaxIdleConns(dbConfig.MaxIdle)

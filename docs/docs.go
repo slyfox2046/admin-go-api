@@ -32,6 +32,194 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/dept/add": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "新增部门接口",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "新增部门接口",
+                "parameters": [
+                    {
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.SysDept"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/dept/delete": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据id删除部门接口",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "根据id删除部门接口",
+                "parameters": [
+                    {
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.SysDeptIdDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/dept/info": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据id查询部门接口",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "根据id查询部门接口",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/dept/list": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "查询部门列表接口",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "查询部门列表接口",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "部门名称",
+                        "name": "deptName",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "部门状态",
+                        "name": "deptStatus",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/dept/update": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "修改部门接口",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "修改部门接口",
+                "parameters": [
+                    {
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.SysDept"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/dept/vo/list": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "部门下拉列表接口",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "部门下拉列表接口",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
         "/api/login": {
             "post": {
                 "description": "用户登录接口",
@@ -376,6 +564,55 @@ const docTemplate = `{
                 "username": {
                     "description": "用户名",
                     "type": "string"
+                }
+            }
+        },
+        "entity.SysDept": {
+            "type": "object",
+            "properties": {
+                "children": {
+                    "description": "子集",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entity.SysDept"
+                    }
+                },
+                "createTime": {
+                    "description": "创建时间",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/util.HTime"
+                        }
+                    ]
+                },
+                "deptName": {
+                    "description": "部门名称",
+                    "type": "string"
+                },
+                "deptStatus": {
+                    "description": "部门状态（1-\u003e正常 2-\u003e停用）",
+                    "type": "integer"
+                },
+                "deptType": {
+                    "description": "部门类型（1-\u003e公司, 2-\u003e中心，3-\u003e部门）",
+                    "type": "integer"
+                },
+                "id": {
+                    "description": "ID",
+                    "type": "integer"
+                },
+                "parentId": {
+                    "description": "父id",
+                    "type": "integer"
+                }
+            }
+        },
+        "entity.SysDeptIdDto": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "ID",
+                    "type": "integer"
                 }
             }
         },

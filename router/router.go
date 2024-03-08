@@ -35,10 +35,10 @@ func register(router *gin.Engine) {
 	router.POST("/api/post/add", controller.CreateSysPost)
 	router.GET("/api/post/list", controller.GetSysPostList)
 	router.GET("/api/post/info", controller.GetSysPostById)
-	router.PUT("/post/update", controller.UpdateSysPost)
-	router.DELETE("/post/delete", controller.DeleteSysPostById)
-	router.DELETE("/post/batch/delete", controller.BatchDeleteSysPost)
-	router.PUT("/post/updateStatus", controller.UpdateSysPostStatus)
-	router.GET("/post/vo/list", controller.QuerySysPostVoList)
+	router.PUT("/api/post/update", controller.UpdateSysPost)
+	router.DELETE("/api/post/delete", controller.DeleteSysPostById)
+	router.DELETE("/api/post/batch/delete", controller.BatchDeleteSysPost)
+	router.PUT("/api/post/updateStatus", controller.UpdateSysPostStatus)
+	router.GET("/api/post/vo/list", controller.QuerySysPostVoList)
 
 }

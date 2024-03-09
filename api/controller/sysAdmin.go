@@ -49,19 +49,19 @@ func GetSysAdminInfo(c *gin.Context) {
 	service.SysAdminService().GetSysAdminInfo(c, Id)
 }
 
-// // UpdateSysAdmin 修改用户
-// // @Summary 修改用户接口
-// // @Produce json
-// // @Description 修改用户接口
-// // @Param data body entity.UpdateSysAdminDto true "data"
-// // @Success 200 {object} result.Result
-// // @router /api/admin/update [put]
-// // @Security ApiKeyAuth
-// func UpdateSysAdmin(c *gin.Context) {
-// 	var dto entity.UpdateSysAdminDto
-// 	_ = c.BindJSON(&dto)
-// 	service.SysAdminService().UpdateSysAdmin(c, dto)
-// }
+// UpdateSysAdmin 修改用户
+// @Summary 修改用户接口
+// @Produce json
+// @Description 修改用户接口
+// @Param data body entity.UpdateSysAdminDto true "data"
+// @Success 200 {object} result.Result
+// @router /api/admin/update [put]
+// @Security ApiKeyAuth
+func UpdateSysAdmin(c *gin.Context) {
+	var dto entity.UpdateSysAdminDto
+	_ = c.BindJSON(&dto)
+	service.SysAdminService().UpdateSysAdmin(c, dto)
+}
 
 // // DeleteSysAdminById 根据id删除用户
 // // @Summary 根据id删除接口

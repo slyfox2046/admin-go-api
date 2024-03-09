@@ -213,6 +213,39 @@ definitions:
         description: ID
         type: integer
     type: object
+  entity.UpdateSysAdminDto:
+    properties:
+      deptId:
+        description: 部门id
+        type: integer
+      email:
+        description: 邮箱
+        type: string
+      id:
+        description: ID
+        type: integer
+      nickname:
+        description: 昵称
+        type: string
+      note:
+        description: 备注
+        type: string
+      phone:
+        description: 手机号
+        type: string
+      postId:
+        description: 岗位id
+        type: integer
+      roleId:
+        description: 角色id
+        type: integer
+      status:
+        description: 状态：1->启用,2->禁用
+        type: integer
+      username:
+        description: 用户名
+        type: string
+    type: object
   entity.UpdateSysPostStatusDto:
     properties:
       id:
@@ -310,6 +343,26 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: 根据id查询用户接口
+  /api/admin/update:
+    put:
+      description: 修改用户接口
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.UpdateSysAdminDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      security:
+      - ApiKeyAuth: []
+      summary: 修改用户接口
   /api/captcha:
     get:
       description: 验证码接口

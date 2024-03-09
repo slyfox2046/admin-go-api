@@ -94,12 +94,12 @@ func UpdateSysAdmin(dto entity.UpdateSysAdminDto) (sysAdmin entity.SysAdmin) {
 	return sysAdmin
 }
 
-// // DeleteSysAdminById 根据id删除用户
-// func DeleteSysAdminById(dto entity.SysAdminIdDto) {
-// 	Db.First(&entity.SysAdmin{}, dto.Id)
-// 	Db.Delete(&entity.SysAdmin{}, dto.Id)
-// 	Db.Where("admin_id = ?", dto.Id).Delete(&entity.SysAdminRole{})
-// }
+// DeleteSysAdminById 根据id删除用户
+func DeleteSysAdminById(dto entity.SysAdminIdDto) {
+	Db.First(&entity.SysAdmin{}, dto.Id)
+	Db.Delete(&entity.SysAdmin{}, dto.Id)
+	Db.Where("admin_id = ?", dto.Id).Delete(&entity.SysAdminRole{})
+}
 
 // // UpdateSysAdminStatus 修改用户状态
 // func UpdateSysAdminStatus(dto entity.UpdateSysAdminStatusDto) {

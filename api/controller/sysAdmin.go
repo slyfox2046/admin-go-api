@@ -63,19 +63,19 @@ func UpdateSysAdmin(c *gin.Context) {
 	service.SysAdminService().UpdateSysAdmin(c, dto)
 }
 
-// // DeleteSysAdminById 根据id删除用户
-// // @Summary 根据id删除接口
-// // @Produce json
-// // @Description 根据id删除接口
-// // @Param data body entity.SysAdminIdDto true "data"
-// // @Success 200 {object} result.Result
-// // @router /api/admin/delete [delete]
-// // @Security ApiKeyAuth
-// func DeleteSysAdminById(c *gin.Context) {
-// 	var dto entity.SysAdminIdDto
-// 	_ = c.BindJSON(&dto)
-// 	service.SysAdminService().DeleteSysAdminById(c, dto)
-// }
+// DeleteSysAdminById 根据id删除用户
+// @Summary 根据id删除接口
+// @Produce json
+// @Description 根据id删除接口
+// @Param data body entity.SysAdminIdDto true "data"
+// @Success 200 {object} result.Result
+// @router /api/admin/delete [delete]
+// @Security ApiKeyAuth
+func DeleteSysAdminById(c *gin.Context) {
+	var dto entity.SysAdminIdDto
+	_ = c.BindJSON(&dto)
+	service.SysAdminService().DeleteSysAdminById(c, dto)
+}
 
 // //	用户状态启用/停用
 // //

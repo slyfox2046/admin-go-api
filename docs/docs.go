@@ -145,6 +145,39 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/admin/updateStatus": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用户状态启用/停用接口",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "用户状态启用/停用接口",
+                "parameters": [
+                    {
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.UpdateSysAdminStatusDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
         "/api/captcha": {
             "get": {
                 "description": "验证码接口",
@@ -1507,6 +1540,19 @@ const docTemplate = `{
                 "username": {
                     "description": "用户名",
                     "type": "string"
+                }
+            }
+        },
+        "entity.UpdateSysAdminStatusDto": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "ID",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "状态：1-\u003e启用,2-\u003e禁用",
+                    "type": "integer"
                 }
             }
         },

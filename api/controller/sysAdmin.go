@@ -77,20 +77,20 @@ func DeleteSysAdminById(c *gin.Context) {
 	service.SysAdminService().DeleteSysAdminById(c, dto)
 }
 
-// //	用户状态启用/停用
-// //
-// // @Summary 用户状态启用/停用接口
-// // @Produce json
-// // @Description 用户状态启用/停用接口
-// // @Param data body entity.UpdateSysAdminStatusDto true "data"
-// // @Success 200 {object} result.Result
-// // @router /api/admin/updateStatus [put]
-// // @Security ApiKeyAuth
-// func UpdateSysAdminStatus(c *gin.Context) {
-// 	var dto entity.UpdateSysAdminStatusDto
-// 	_ = c.BindJSON(&dto)
-// 	service.SysAdminService().UpdateSysAdminStatus(c, dto)
-// }
+//	用户状态启用/停用
+//
+// @Summary 用户状态启用/停用接口
+// @Produce json
+// @Description 用户状态启用/停用接口
+// @Param data body entity.UpdateSysAdminStatusDto true "data"
+// @Success 200 {object} result.Result
+// @router /api/admin/updateStatus [put]
+// @Security ApiKeyAuth
+func UpdateSysAdminStatus(c *gin.Context) {
+	var dto entity.UpdateSysAdminStatusDto
+	_ = c.BindJSON(&dto)
+	service.SysAdminService().UpdateSysAdminStatus(c, dto)
+}
 
 // // ResetSysAdminPassword 重置密码
 // // @Summary 重置密码接口

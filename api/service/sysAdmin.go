@@ -22,7 +22,7 @@ type ISysAminService interface {
 	DeleteSysAdminById(c *gin.Context, dto entity.SysAdminIdDto)
 	UpdateSysAdminStatus(c *gin.Context, dto entity.UpdateSysAdminStatusDto)
 	ResetSysAdminPassword(c *gin.Context, dto entity.ResetSysAdminPasswordDto)
-	// GetSysAdminList(c *gin.Context, PageSize, PageNum int, Username, Status, BeginTime, EndTime string)
+	GetSysAdminList(c *gin.Context, PageSize, PageNum int, Username, Status, BeginTime, EndTime string)
 	// UpdatePersonal(c *gin.Context, dto entity.UpdatePersonalDto)
 	// UpdatePersonalPassword(c *gin.Context, dto entity.UpdatePersonalPasswordDto)
 }
@@ -66,18 +66,18 @@ type SysAdminServiceImpl struct{}
 // 	result.Success(c, dao.UpdatePersonal(dto))
 // }
 
-// // 分页查询用户列表
-// func (s SysAdminServiceImpl) GetSysAdminList(c *gin.Context, PageSize, PageNum int, Username, Status, BeginTime, EndTime string) {
-// 	if PageSize < 1 {
-// 		PageSize = 10
-// 	}
-// 	if PageNum < 1 {
-// 		PageNum = 1
-// 	}
-// 	sysAdmin, count := dao.GetSysAdminList(PageSize, PageNum, Username, Status, BeginTime, EndTime)
-// 	result.Success(c, map[string]interface{}{"total": count, "pageSize": PageSize, "pageNum": PageNum, "list": sysAdmin})
-// 	return
-// }
+// 分页查询用户列表
+func (s SysAdminServiceImpl) GetSysAdminList(c *gin.Context, PageSize, PageNum int, Username, Status, BeginTime, EndTime string) {
+	if PageSize < 1 {
+		PageSize = 10
+	}
+	if PageNum < 1 {
+		PageNum = 1
+	}
+	sysAdmin, count := dao.GetSysAdminList(PageSize, PageNum, Username, Status, BeginTime, EndTime)
+	result.Success(c, map[string]interface{}{"total": count, "pageSize": PageSize, "pageNum": PageNum, "list": sysAdmin})
+	return
+}
 
 // 重置密码
 func (s SysAdminServiceImpl) ResetSysAdminPassword(c *gin.Context, dto entity.ResetSysAdminPasswordDto) {

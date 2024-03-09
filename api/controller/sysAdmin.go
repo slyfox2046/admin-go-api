@@ -92,19 +92,19 @@ func UpdateSysAdminStatus(c *gin.Context) {
 	service.SysAdminService().UpdateSysAdminStatus(c, dto)
 }
 
-// // ResetSysAdminPassword 重置密码
-// // @Summary 重置密码接口
-// // @Produce json
-// // @Description 重置密码接口
-// // @Param data body entity.ResetSysAdminPasswordDto true "data"
-// // @Success 200 {object} result.Result
-// // @router /api/admin/updatePassword [put]
-// // @Security ApiKeyAuth
-// func ResetSysAdminPassword(c *gin.Context) {
-// 	var dto entity.ResetSysAdminPasswordDto
-// 	_ = c.BindJSON(&dto)
-// 	service.SysAdminService().ResetSysAdminPassword(c, dto)
-// }
+// ResetSysAdminPassword 重置密码
+// @Summary 重置密码接口
+// @Produce json
+// @Description 重置密码接口
+// @Param data body entity.ResetSysAdminPasswordDto true "data"
+// @Success 200 {object} result.Result
+// @router /api/admin/updatePassword [put]
+// @Security ApiKeyAuth
+func ResetSysAdminPassword(c *gin.Context) {
+	var dto entity.ResetSysAdminPasswordDto
+	_ = c.BindJSON(&dto)
+	service.SysAdminService().ResetSysAdminPassword(c, dto)
+}
 
 // // GetSysAdminList 分页获取用户列表
 // // @Summary 分页获取用户列表接口

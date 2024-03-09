@@ -145,6 +145,39 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/admin/updatePassword": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "重置密码接口",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "重置密码接口",
+                "parameters": [
+                    {
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.ResetSysAdminPasswordDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
         "/api/admin/updateStatus": {
             "put": {
                 "security": [
@@ -1300,6 +1333,19 @@ const docTemplate = `{
                 },
                 "username": {
                     "description": "用户名",
+                    "type": "string"
+                }
+            }
+        },
+        "entity.ResetSysAdminPasswordDto": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "ID",
+                    "type": "integer"
+                },
+                "password": {
+                    "description": "密码",
                     "type": "string"
                 }
             }

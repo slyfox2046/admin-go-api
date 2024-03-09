@@ -109,13 +109,13 @@ func UpdateSysAdminStatus(dto entity.UpdateSysAdminStatusDto) {
 	Db.Save(&sysAdmin)
 }
 
-// // ResetSysAdminPassword 重置密码
-// func ResetSysAdminPassword(dto entity.ResetSysAdminPasswordDto) {
-// 	var sysAdmin entity.SysAdmin
-// 	Db.First(&sysAdmin, dto.Id)
-// 	sysAdmin.Password = util.EncryptionMd5(dto.Password)
-// 	Db.Save(&sysAdmin)
-// }
+// ResetSysAdminPassword 重置密码
+func ResetSysAdminPassword(dto entity.ResetSysAdminPasswordDto) {
+	var sysAdmin entity.SysAdmin
+	Db.First(&sysAdmin, dto.Id)
+	sysAdmin.Password = util.EncryptionMd5(dto.Password)
+	Db.Save(&sysAdmin)
+}
 
 // // GetSysAdminList 分页查询用户列表
 // func GetSysAdminList(PageSize, PageNum int, Username, Status, BeginTime, EndTime string) (sysAdminVo []entity.SysAdminVo, count int64) {

@@ -87,6 +87,15 @@ definitions:
     - password
     - username
     type: object
+  entity.ResetSysAdminPasswordDto:
+    properties:
+      id:
+        description: ID
+        type: integer
+      password:
+        description: 密码
+        type: string
+    type: object
   entity.RoleMenu:
     properties:
       id:
@@ -398,6 +407,26 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: 修改用户接口
+  /api/admin/updatePassword:
+    put:
+      description: 重置密码接口
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.ResetSysAdminPasswordDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      security:
+      - ApiKeyAuth: []
+      summary: 重置密码接口
   /api/admin/updateStatus:
     put:
       description: 用户状态启用/停用接口

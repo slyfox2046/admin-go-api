@@ -21,7 +21,7 @@ type ISysAminService interface {
 	UpdateSysAdmin(c *gin.Context, dto entity.UpdateSysAdminDto)
 	DeleteSysAdminById(c *gin.Context, dto entity.SysAdminIdDto)
 	UpdateSysAdminStatus(c *gin.Context, dto entity.UpdateSysAdminStatusDto)
-	// ResetSysAdminPassword(c *gin.Context, dto entity.ResetSysAdminPasswordDto)
+	ResetSysAdminPassword(c *gin.Context, dto entity.ResetSysAdminPasswordDto)
 	// GetSysAdminList(c *gin.Context, PageSize, PageNum int, Username, Status, BeginTime, EndTime string)
 	// UpdatePersonal(c *gin.Context, dto entity.UpdatePersonalDto)
 	// UpdatePersonalPassword(c *gin.Context, dto entity.UpdatePersonalPasswordDto)
@@ -79,11 +79,11 @@ type SysAdminServiceImpl struct{}
 // 	return
 // }
 
-// // 重置密码
-// func (s SysAdminServiceImpl) ResetSysAdminPassword(c *gin.Context, dto entity.ResetSysAdminPasswordDto) {
-// 	dao.ResetSysAdminPassword(dto)
-// 	result.Success(c, true)
-// }
+// 重置密码
+func (s SysAdminServiceImpl) ResetSysAdminPassword(c *gin.Context, dto entity.ResetSysAdminPasswordDto) {
+	dao.ResetSysAdminPassword(dto)
+	result.Success(c, true)
+}
 
 // 修改用户状态
 func (s SysAdminServiceImpl) UpdateSysAdminStatus(c *gin.Context, dto entity.UpdateSysAdminStatusDto) {

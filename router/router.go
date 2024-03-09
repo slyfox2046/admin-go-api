@@ -6,6 +6,7 @@ import (
 	"admin-go-api/common/config"
 	"admin-go-api/middleware"
 	"net/http"
+
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -42,10 +43,17 @@ func register(router *gin.Engine) {
 	router.GET("/api/post/vo/list", controller.QuerySysPostVoList)
 
 	router.GET("/api/dept/list", controller.GetSysDeptList)
-		router.POST("/api/dept/add", controller.CreateSysDept)
-		router.GET("/api/dept/info", controller.GetSysDeptById)
-		router.PUT("/api/dept/update", controller.UpdateSysDept)
-		router.DELETE("/api/dept/delete", controller.DeleteSysDeptById)
-		router.GET("/api/dept/vo/list", controller.QuerySysDeptVoList)
+	router.POST("/api/dept/add", controller.CreateSysDept)
+	router.GET("/api/dept/info", controller.GetSysDeptById)
+	router.PUT("/api/dept/update", controller.UpdateSysDept)
+	router.DELETE("/api/dept/delete", controller.DeleteSysDeptById)
+	router.GET("/api/dept/vo/list", controller.QuerySysDeptVoList)
+
+	router.POST("/api/menu/add", controller.CreateSysMenu)
+	router.GET("/api/menu/vo/list", controller.QuerySysMenuVoList)
+	router.GET("/api/menu/info", controller.GetSysMenu)
+	router.PUT("/api/menu/update", controller.UpdateSysMenu)
+	router.DELETE("/api/menu/delete", controller.DeleteSysMenu)
+	router.GET("/api/menu/list", controller.GetSysMenuList)
 
 }

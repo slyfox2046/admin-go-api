@@ -239,6 +239,194 @@
                 }
             }
         },
+        "/api/menu/add": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "新增菜单接口",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "新增菜单接口",
+                "parameters": [
+                    {
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/admin-go-api_api_entity.SysMenu"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/menu/delete": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据id删除菜单接口",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "根据id删除菜单接口",
+                "parameters": [
+                    {
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/admin-go-api_api_entity.SysMenuIdDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/menu/info": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据id查询菜单",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "根据id查询菜单",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/menu/list": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "查询菜单列表",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "查询菜单列表",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "菜单名称",
+                        "name": "menuName",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "菜单状态",
+                        "name": "menuStatus",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/menu/update": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "修改菜单接口",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "修改菜单接口",
+                "parameters": [
+                    {
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/admin-go-api_api_entity.SysMenu"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/menu/vo/list": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "查询新增选项列表接口",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "查询新增选项列表接口",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
         "/api/post/add": {
             "post": {
                 "security": [
@@ -518,6 +706,71 @@
         }
     },
     "definitions": {
+        "admin-go-api_api_entity.SysMenu": {
+            "type": "object",
+            "properties": {
+                "children": {
+                    "description": "子集",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/admin-go-api_api_entity.SysMenu"
+                    }
+                },
+                "createTime": {
+                    "description": "创建时间",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/util.HTime"
+                        }
+                    ]
+                },
+                "icon": {
+                    "description": "菜单图标",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "ID",
+                    "type": "integer"
+                },
+                "menuName": {
+                    "description": "菜单名称",
+                    "type": "string"
+                },
+                "menuStatus": {
+                    "description": "启用状态；1-\u003e禁用；2-\u003e启用",
+                    "type": "integer"
+                },
+                "menuType": {
+                    "description": "菜单类型：1-\u003e目录；2-\u003e菜单；3-\u003e按钮",
+                    "type": "integer"
+                },
+                "parentId": {
+                    "description": "父菜单id",
+                    "type": "integer"
+                },
+                "sort": {
+                    "description": "排序",
+                    "type": "integer"
+                },
+                "url": {
+                    "description": "菜单url",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "权限值",
+                    "type": "string"
+                }
+            }
+        },
+        "admin-go-api_api_entity.SysMenuIdDto": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "ID",
+                    "type": "integer"
+                }
+            }
+        },
         "entity.DelSysPostDto": {
             "type": "object",
             "properties": {

@@ -1,4 +1,49 @@
 definitions:
+  admin-go-api_api_entity.SysMenu:
+    properties:
+      children:
+        description: 子集
+        items:
+          $ref: '#/definitions/admin-go-api_api_entity.SysMenu'
+        type: array
+      createTime:
+        allOf:
+        - $ref: '#/definitions/util.HTime'
+        description: 创建时间
+      icon:
+        description: 菜单图标
+        type: string
+      id:
+        description: ID
+        type: integer
+      menuName:
+        description: 菜单名称
+        type: string
+      menuStatus:
+        description: 启用状态；1->禁用；2->启用
+        type: integer
+      menuType:
+        description: 菜单类型：1->目录；2->菜单；3->按钮
+        type: integer
+      parentId:
+        description: 父菜单id
+        type: integer
+      sort:
+        description: 排序
+        type: integer
+      url:
+        description: 菜单url
+        type: string
+      value:
+        description: 权限值
+        type: string
+    type: object
+  admin-go-api_api_entity.SysMenuIdDto:
+    properties:
+      id:
+        description: ID
+        type: integer
+    type: object
   entity.DelSysPostDto:
     properties:
       ids:
@@ -263,6 +308,120 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/result.Result'
+  /api/menu/add:
+    post:
+      description: 新增菜单接口
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/admin-go-api_api_entity.SysMenu'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      security:
+      - ApiKeyAuth: []
+      summary: 新增菜单接口
+  /api/menu/delete:
+    delete:
+      description: 根据id删除菜单接口
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/admin-go-api_api_entity.SysMenuIdDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      security:
+      - ApiKeyAuth: []
+      summary: 根据id删除菜单接口
+  /api/menu/info:
+    get:
+      description: 根据id查询菜单
+      parameters:
+      - description: id
+        in: query
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      security:
+      - ApiKeyAuth: []
+      summary: 根据id查询菜单
+  /api/menu/list:
+    get:
+      description: 查询菜单列表
+      parameters:
+      - description: 菜单名称
+        in: query
+        name: menuName
+        type: string
+      - description: 菜单状态
+        in: query
+        name: menuStatus
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      security:
+      - ApiKeyAuth: []
+      summary: 查询菜单列表
+  /api/menu/update:
+    put:
+      description: 修改菜单接口
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/admin-go-api_api_entity.SysMenu'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      security:
+      - ApiKeyAuth: []
+      summary: 修改菜单接口
+  /api/menu/vo/list:
+    get:
+      description: 查询新增选项列表接口
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      security:
+      - ApiKeyAuth: []
+      summary: 查询新增选项列表接口
   /api/post/add:
     post:
       description: 新增岗位接口

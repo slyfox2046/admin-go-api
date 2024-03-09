@@ -16,7 +16,7 @@ import (
 // 定义接口
 type ISysAminService interface {
 	Login(c *gin.Context, dto entity.LoginDto)
-	// CreateSysAdmin(c *gin.Context, dto entity.AddSysAdminDto)
+	CreateSysAdmin(c *gin.Context, dto entity.AddSysAdminDto)
 	// GetSysAdminInfo(c *gin.Context, Id int)
 	// UpdateSysAdmin(c *gin.Context, dto entity.UpdateSysAdminDto)
 	// DeleteSysAdminById(c *gin.Context, dto entity.SysAdminIdDto)
@@ -107,21 +107,21 @@ type SysAdminServiceImpl struct{}
 // 	result.Success(c, dao.GetSysAdminInfo(Id))
 // }
 
-// // 新增用户
-// func (s SysAdminServiceImpl) CreateSysAdmin(c *gin.Context, dto entity.AddSysAdminDto) {
-// 	err := validator.New().Struct(dto)
-// 	if err != nil {
-// 		result.Failed(c, int(result.ApiCode.MissingNewAdminParameter), result.ApiCode.GetMessage(result.ApiCode.MissingNewAdminParameter))
-// 		return
-// 	}
-// 	bool := dao.CreateSysAdmin(dto)
-// 	if !bool {
-// 		result.Failed(c, int(result.ApiCode.USERNAMEALREADYEXISTS), result.ApiCode.GetMessage(result.ApiCode.USERNAMEALREADYEXISTS))
-// 		return
-// 	}
-// 	result.Success(c, bool)
-// 	return
-// }
+// 新增用户
+func (s SysAdminServiceImpl) CreateSysAdmin(c *gin.Context, dto entity.AddSysAdminDto) {
+	err := validator.New().Struct(dto)
+	if err != nil {
+		result.Failed(c, int(result.ApiCode.MissingNewAdminParameter), result.ApiCode.GetMessage(result.ApiCode.MissingNewAdminParameter))
+		return
+	}
+	bool := dao.CreateSysAdmin(dto)
+	if !bool {
+		result.Failed(c, int(result.ApiCode.USERNAMEALREADYEXISTS), result.ApiCode.GetMessage(result.ApiCode.USERNAMEALREADYEXISTS))
+		return
+	}
+	result.Success(c, bool)
+	return
+}
 
 // 用户登录
 func (s SysAdminServiceImpl) Login(c *gin.Context, dto entity.LoginDto) {

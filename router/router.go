@@ -66,4 +66,23 @@ func register(router *gin.Engine) {
 	router.GET("/api/role/vo/idList", controller.QueryRoleMenuIdList)
 	router.PUT("/api/role/assignPermissions", controller.AssignPermissions)
 
+	router.POST("/api/admin/add", controller.CreateSysAdmin)
+	// router.GET("/api/admin/info", controller.GetSysAdminInfo)
+	// router.PUT("/api/admin/update", controller.UpdateSysAdmin)
+	// router.DELETE("/api/admin/delete", controller.DeleteSysAdminById)
+	// router.PUT("/api/admin/updateStatus", controller.UpdateSysAdminStatus)
+	// router.PUT("/api/admin/updatePassword", controller.ResetSysAdminPassword)
+	// router.GET("/api/admin/list", controller.GetSysAdminList)
+	// router.POST("/api/upload", controller.Upload)
+	// router.PUT("/api/admin/updatePersonal", controller.UpdatePersonal)
+	// router.PUT("/api/admin/updatePersonalPassword", controller.UpdatePersonalPassword)
+	// router.GET("/api/sysLoginInfo/list", controller.GetSysLoginInfoList)
+	// router.DELETE("/api/sysLoginInfo/batch/delete", controller.BatchDeleteSysLoginInfo)
+	// router.DELETE("/api/sysLoginInfo/delete", controller.DeleteSysLoginInfoById)
+	// router.DELETE("/api/sysLoginInfo/clean", controller.CleanSysLoginInfo)
+	// router.GET("/api/sysOperationLog/list", controller.GetSysOperationLogList)
+	// router.DELETE("/api/sysOperationLog/delete", controller.DeleteSysOperationLogById)
+	// router.DELETE("/api/sysOperationLog/batch/delete", controller.BatchDeleteSysOperationLog)
+	// router.DELETE("/api/sysOperationLog/clean", controller.CleanSysOperationLog)
+
 }

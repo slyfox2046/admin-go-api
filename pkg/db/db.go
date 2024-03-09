@@ -47,6 +47,7 @@ func SetupDBLink() error {
 	Db.AutoMigrate(&entity.SysMenu{})
 	Db.AutoMigrate(&entity.SysRoleMenu{})
 	Db.AutoMigrate(&entity.SysRole{})
+	Db.AutoMigrate(&entity.SysAdminRole{})
 
 	sqlDB, _ := Db.DB()
 	sqlDB.SetMaxIdleConns(dbConfig.MaxIdle)

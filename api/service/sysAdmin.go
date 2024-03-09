@@ -17,7 +17,7 @@ import (
 type ISysAminService interface {
 	Login(c *gin.Context, dto entity.LoginDto)
 	CreateSysAdmin(c *gin.Context, dto entity.AddSysAdminDto)
-	// GetSysAdminInfo(c *gin.Context, Id int)
+	GetSysAdminInfo(c *gin.Context, Id int)
 	// UpdateSysAdmin(c *gin.Context, dto entity.UpdateSysAdminDto)
 	// DeleteSysAdminById(c *gin.Context, dto entity.SysAdminIdDto)
 	// UpdateSysAdminStatus(c *gin.Context, dto entity.UpdateSysAdminStatusDto)
@@ -102,10 +102,10 @@ type SysAdminServiceImpl struct{}
 // 	result.Success(c, dao.UpdateSysAdmin(dto))
 // }
 
-// // 根据id查询用户信息
-// func (s SysAdminServiceImpl) GetSysAdminInfo(c *gin.Context, Id int) {
-// 	result.Success(c, dao.GetSysAdminInfo(Id))
-// }
+// 根据id查询用户信息
+func (s SysAdminServiceImpl) GetSysAdminInfo(c *gin.Context, Id int) {
+	result.Success(c, dao.GetSysAdminInfo(Id))
+}
 
 // 新增用户
 func (s SysAdminServiceImpl) CreateSysAdmin(c *gin.Context, dto entity.AddSysAdminDto) {

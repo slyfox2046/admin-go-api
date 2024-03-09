@@ -48,6 +48,37 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/admin/info": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据id查询用户接口",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "根据id查询用户接口",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Id",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
         "/api/captcha": {
             "get": {
                 "description": "验证码接口",

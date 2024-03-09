@@ -7,7 +7,7 @@ import (
 	"admin-go-api/api/entity"
 	"admin-go-api/api/service"
 	"github.com/gin-gonic/gin"
-	// "strconv"
+	"strconv"
 )
 
 // Login @Summary 用户登录接口
@@ -36,18 +36,18 @@ func CreateSysAdmin(c *gin.Context) {
 	service.SysAdminService().CreateSysAdmin(c, dto)
 }
 
-// // GetSysAdminInfo 根据id查询用户
-// // @Summary 根据id查询用户接口
-// // @Produce json
-// // @Description 根据id查询用户接口
-// // @Param id query int true "Id"
-// // @Success 200 {object} result.Result
-// // @router /api/admin/info [get]
-// // @Security ApiKeyAuth
-// func GetSysAdminInfo(c *gin.Context) {
-// 	Id, _ := strconv.Atoi(c.Query("id"))
-// 	service.SysAdminService().GetSysAdminInfo(c, Id)
-// }
+// GetSysAdminInfo 根据id查询用户
+// @Summary 根据id查询用户接口
+// @Produce json
+// @Description 根据id查询用户接口
+// @Param id query int true "Id"
+// @Success 200 {object} result.Result
+// @router /api/admin/info [get]
+// @Security ApiKeyAuth
+func GetSysAdminInfo(c *gin.Context) {
+	Id, _ := strconv.Atoi(c.Query("id"))
+	service.SysAdminService().GetSysAdminInfo(c, Id)
+}
 
 // // UpdateSysAdmin 修改用户
 // // @Summary 修改用户接口

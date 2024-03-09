@@ -1099,6 +1099,27 @@ paths:
       security:
       - ApikeyAuth: []
       summary: 角色下拉列表
+  /api/upload:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 单图片上传接口
+      parameters:
+      - description: file
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      security:
+      - ApiKeyAuth: []
+      summary: 单图片上传接口
 securityDefinitions:
   ApiKeyAuth:
     in: header

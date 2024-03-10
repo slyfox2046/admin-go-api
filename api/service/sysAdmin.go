@@ -171,18 +171,18 @@ func (s SysAdminServiceImpl) Login(c *gin.Context, dto entity.LoginDto) {
 	// dao.CreateSysLoginInfo(dto.Username, ip, util.GetRealAddressByIP(ip), util.GetBrowser(c), util.GetOs(c), "登录成功", 1)
 	
 	// 左侧菜单列表
-	// var leftMenuVo []entity.LeftMenuVo
-	// leftMenuList := dao.QueryLeftMenuList(sysAdmin.ID)
-	// for _, value := range leftMenuList {
-	// 	menuSvoList := dao.QueryMenuVoList(sysAdmin.ID, value.Id)
-	// 	item := entity.LeftMenuVo{}
-	// 	item.MenuSvoList = menuSvoList
-	// 	item.Id = value.Id
-	// 	item.MenuName = value.MenuName
-	// 	item.Icon = value.Icon
-	// 	item.Url = value.Url
-	// 	leftMenuVo = append(leftMenuVo, item)
-	// }
+	var leftMenuVo []entity.LeftMenuVo
+	leftMenuList := dao.QueryLeftMenuList(sysAdmin.ID)
+	for _, value := range leftMenuList {
+		menuSvoList := dao.QueryMenuVoList(sysAdmin.ID, value.Id)
+		item := entity.LeftMenuVo{}
+		item.MenuSvoList = menuSvoList
+		item.Id = value.Id
+		item.MenuName = value.MenuName
+		item.Icon = value.Icon
+		item.Url = value.Url
+		leftMenuVo = append(leftMenuVo, item)
+	}
 	// // 权限列表
 	// permissionList := dao.QueryPermissionList(sysAdmin.ID)
 	// var stringList = make([]string, 0)
@@ -191,7 +191,7 @@ func (s SysAdminServiceImpl) Login(c *gin.Context, dto entity.LoginDto) {
 	// }
 	// result.Success(c, map[string]interface{}{"token": tokenString, "sysAdmin": sysAdmin, "leftMenuList": leftMenuVo, "permissionList": stringList})
 	
-	result.Success(c, map[string]interface{}{"token": tokenString, "sysAdmin": sysAdmin})
+	result.Success(c, map[string]interface{}{"token": tokenString, "sysAdmin": sysAdmin,"leftMenuList":leftMenuVo})
 }
 
 var sysAdminService = SysAdminServiceImpl{}

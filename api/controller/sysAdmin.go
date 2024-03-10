@@ -129,19 +129,19 @@ func GetSysAdminList(c *gin.Context) {
 	service.SysAdminService().GetSysAdminList(c, PageSize, PageNum, Username, Status, BeginTime, EndTime)
 }
 
-// // UpdatePersonal 修改个人信息
-// // @Summary 修改个人信息接口
-// // @Produce json
-// // @Description 修改个人信息接口
-// // @Param data body entity.UpdatePersonalDto true "data"
-// // @Success 200 {object} result.Result
-// // @router /api/admin/updatePersonal [put]
-// // @Security ApiKeyAuth
-// func UpdatePersonal(c *gin.Context) {
-// 	var dto entity.UpdatePersonalDto
-// 	_ = c.BindJSON(&dto)
-// 	service.SysAdminService().UpdatePersonal(c, dto)
-// }
+// UpdatePersonal 修改个人信息
+// @Summary 修改个人信息接口
+// @Produce json
+// @Description 修改个人信息接口
+// @Param data body entity.UpdatePersonalDto true "data"
+// @Success 200 {object} result.Result
+// @router /api/admin/updatePersonal [put]
+// @Security ApiKeyAuth
+func UpdatePersonal(c *gin.Context) {
+	var dto entity.UpdatePersonalDto
+	_ = c.BindJSON(&dto)
+	service.SysAdminService().UpdatePersonal(c, dto)
+}
 
 // // UpdatePersonalPassword 修改密码
 // // @Summary 修改密码接口

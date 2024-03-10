@@ -23,7 +23,7 @@ type ISysAminService interface {
 	UpdateSysAdminStatus(c *gin.Context, dto entity.UpdateSysAdminStatusDto)
 	ResetSysAdminPassword(c *gin.Context, dto entity.ResetSysAdminPasswordDto)
 	GetSysAdminList(c *gin.Context, PageSize, PageNum int, Username, Status, BeginTime, EndTime string)
-	// UpdatePersonal(c *gin.Context, dto entity.UpdatePersonalDto)
+	UpdatePersonal(c *gin.Context, dto entity.UpdatePersonalDto)
 	// UpdatePersonalPassword(c *gin.Context, dto entity.UpdatePersonalPasswordDto)
 }
 
@@ -36,9 +36,13 @@ type SysAdminServiceImpl struct{}
 // 		result.Failed(c, int(result.ApiCode.MissingChangePasswordParameter), result.ApiCode.GetMessage(result.ApiCode.MissingChangePasswordParameter))
 // 		return
 // 	}
-// 	sysAdmin, _ := jwt.GetAdmin(c)
-// 	dto.Id = sysAdmin.ID
-// 	sysAdminExist := dao.GetSysAdminByUsername(sysAdmin.Username)
+// 	// sysAdmin, _ := jwt.GetAdmin(c)
+// 	// dto.Id = sysAdmin.ID
+// 	// sysAdminExist := dao.GetSysAdminByUsername(sysAdmin.Username)
+// 	dto.Id = 3 // 测试写死数据
+// 	var username = "admin" //测试
+// 	sysAdminExist := dao.GetSysAdminByUsername(username) //测试
+
 // 	if sysAdminExist.Password != util.EncryptionMd5(dto.Password) {
 // 		result.Failed(c, int(result.ApiCode.PASSWORDNOTTRUE), result.ApiCode.GetMessage(result.ApiCode.PASSWORDNOTTRUE))
 // 		return
@@ -54,17 +58,18 @@ type SysAdminServiceImpl struct{}
 // 	return
 // }
 
-// // 修改个人信息
-// func (s SysAdminServiceImpl) UpdatePersonal(c *gin.Context, dto entity.UpdatePersonalDto) {
-// 	err := validator.New().Struct(dto)
-// 	if err != nil {
-// 		result.Failed(c, int(result.ApiCode.MissingModificationOfPersonalParameters), result.ApiCode.GetMessage(result.ApiCode.MissingModificationOfPersonalParameters))
-// 		return
-// 	}
-// 	id, _ := jwt.GetAdminId(c)
-// 	dto.Id = id
-// 	result.Success(c, dao.UpdatePersonal(dto))
-// }
+// 修改个人信息
+func (s SysAdminServiceImpl) UpdatePersonal(c *gin.Context, dto entity.UpdatePersonalDto) {
+	err := validator.New().Struct(dto)
+	if err != nil {
+		result.Failed(c, int(result.ApiCode.MissingModificationOfPersonalParameters), result.ApiCode.GetMessage(result.ApiCode.MissingModificationOfPersonalParameters))
+		return
+	}
+	// id, _ := jwt.GetAdminId(c)
+	// dto.Id = id
+	dto.Id= 3 // 测试写死数据
+	result.Success(c, dao.UpdatePersonal(dto))
+}
 
 // 分页查询用户列表
 func (s SysAdminServiceImpl) GetSysAdminList(c *gin.Context, PageSize, PageNum int, Username, Status, BeginTime, EndTime string) {

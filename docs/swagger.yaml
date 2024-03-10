@@ -228,6 +228,55 @@ definitions:
         description: ID
         type: integer
     type: object
+  entity.UpdatePersonalDto:
+    properties:
+      email:
+        description: 邮箱
+        type: string
+      icon:
+        description: 头像
+        type: string
+      id:
+        description: ID
+        type: integer
+      nickname:
+        description: 昵称
+        type: string
+      note:
+        description: 备注
+        type: string
+      phone:
+        description: 电话
+        type: string
+      username:
+        description: 用户名
+        type: string
+    required:
+    - email
+    - nickname
+    - note
+    - phone
+    - username
+    type: object
+  entity.UpdatePersonalPasswordDto:
+    properties:
+      id:
+        description: ID
+        type: integer
+      newPassword:
+        description: 新密码
+        type: string
+      password:
+        description: 密码
+        type: string
+      resetPassword:
+        description: 重复密码
+        type: string
+    required:
+    - newPassword
+    - password
+    - resetPassword
+    type: object
   entity.UpdateSysAdminDto:
     properties:
       deptId:
@@ -465,6 +514,46 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: 重置密码接口
+  /api/admin/updatePersonal:
+    put:
+      description: 修改个人信息接口
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.UpdatePersonalDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      security:
+      - ApiKeyAuth: []
+      summary: 修改个人信息接口
+  /api/admin/updatePersonalPassword:
+    put:
+      description: 修改密码接口
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.UpdatePersonalPasswordDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      security:
+      - ApiKeyAuth: []
+      summary: 修改密码接口
   /api/admin/updateStatus:
     put:
       description: 用户状态启用/停用接口

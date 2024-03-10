@@ -238,6 +238,72 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/admin/updatePersonal": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "修改个人信息接口",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "修改个人信息接口",
+                "parameters": [
+                    {
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.UpdatePersonalDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/updatePersonalPassword": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "修改密码接口",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "修改密码接口",
+                "parameters": [
+                    {
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.UpdatePersonalPasswordDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
         "/api/admin/updateStatus": {
             "put": {
                 "security": [
@@ -1635,6 +1701,72 @@ const docTemplate = `{
                 "id": {
                     "description": "ID",
                     "type": "integer"
+                }
+            }
+        },
+        "entity.UpdatePersonalDto": {
+            "type": "object",
+            "required": [
+                "email",
+                "nickname",
+                "note",
+                "phone",
+                "username"
+            ],
+            "properties": {
+                "email": {
+                    "description": "邮箱",
+                    "type": "string"
+                },
+                "icon": {
+                    "description": "头像",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "ID",
+                    "type": "integer"
+                },
+                "nickname": {
+                    "description": "昵称",
+                    "type": "string"
+                },
+                "note": {
+                    "description": "备注",
+                    "type": "string"
+                },
+                "phone": {
+                    "description": "电话",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "用户名",
+                    "type": "string"
+                }
+            }
+        },
+        "entity.UpdatePersonalPasswordDto": {
+            "type": "object",
+            "required": [
+                "newPassword",
+                "password",
+                "resetPassword"
+            ],
+            "properties": {
+                "id": {
+                    "description": "ID",
+                    "type": "integer"
+                },
+                "newPassword": {
+                    "description": "新密码",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "密码",
+                    "type": "string"
+                },
+                "resetPassword": {
+                    "description": "重复密码",
+                    "type": "string"
                 }
             }
         },

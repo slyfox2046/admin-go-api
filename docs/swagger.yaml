@@ -57,6 +57,14 @@ definitions:
         description: 状态：1->启用,2->禁用
         type: integer
     type: object
+  entity.DelSysLoginInfoDto:
+    properties:
+      ids:
+        description: Id列表
+        items:
+          type: integer
+        type: array
+    type: object
   entity.DelSysPostDto:
     properties:
       ids:
@@ -144,6 +152,12 @@ definitions:
         type: integer
     type: object
   entity.SysDeptIdDto:
+    properties:
+      id:
+        description: ID
+        type: integer
+    type: object
+  entity.SysLoginInfoIdDto:
     properties:
       id:
         description: ID
@@ -1188,6 +1202,97 @@ paths:
       security:
       - ApikeyAuth: []
       summary: 角色下拉列表
+  /api/sysLoginInfo/batch/delete:
+    delete:
+      description: 批量删除登录日志接口
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.DelSysLoginInfoDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      security:
+      - ApiKeyAuth: []
+      summary: 批量删除登录日志接口
+  /api/sysLoginInfo/clean:
+    delete:
+      description: 清空登录日志接口
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      security:
+      - ApiKeyAuth: []
+      summary: 清空登录日志接口
+  /api/sysLoginInfo/delete:
+    delete:
+      description: 根据ID删除登录日志接口
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.SysLoginInfoIdDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      security:
+      - ApiKeyAuth: []
+      summary: 根据ID删除登录日志接口
+  /api/sysLoginInfo/list:
+    get:
+      description: 分页获取登录日志列表接口
+      parameters:
+      - description: 分页数
+        in: query
+        name: pageNum
+        type: integer
+      - description: 每页数
+        in: query
+        name: pageSize
+        type: integer
+      - description: 用户名
+        in: query
+        name: username
+        type: string
+      - description: 登录状态（1-成功 2-失败）
+        in: query
+        name: loginStatus
+        type: string
+      - description: 开始时间
+        in: query
+        name: beginTime
+        type: string
+      - description: 结束时间
+        in: query
+        name: endTime
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      security:
+      - ApiKeyAuth: []
+      summary: 分页获取登录日志列表接口
   /api/upload:
     post:
       consumes:

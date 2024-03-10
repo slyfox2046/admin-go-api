@@ -36,13 +36,9 @@ func (s SysAdminServiceImpl) UpdatePersonalPassword(c *gin.Context, dto entity.U
 		result.Failed(c, int(result.ApiCode.MissingChangePasswordParameter), result.ApiCode.GetMessage(result.ApiCode.MissingChangePasswordParameter))
 		return
 	}
-	// sysAdmin, _ := jwt.GetAdmin(c)
-	// dto.Id = sysAdmin.ID
-	// sysAdminExist := dao.GetSysAdminByUsername(sysAdmin.Username)
-	dto.Id = 3 // 测试写死数据
-	var username = "admin" //测试
-	sysAdminExist := dao.GetSysAdminByUsername(username) //测试
-
+	sysAdmin, _ := jwt.GetAdmin(c)
+	dto.Id = sysAdmin.ID
+	sysAdminExist := dao.GetSysAdminByUsername(sysAdmin.Username)
 	if sysAdminExist.Password != util.EncryptionMd5(dto.Password) {
 		result.Failed(c, int(result.ApiCode.PASSWORDNOTTRUE), result.ApiCode.GetMessage(result.ApiCode.PASSWORDNOTTRUE))
 		return
@@ -65,9 +61,8 @@ func (s SysAdminServiceImpl) UpdatePersonal(c *gin.Context, dto entity.UpdatePer
 		result.Failed(c, int(result.ApiCode.MissingModificationOfPersonalParameters), result.ApiCode.GetMessage(result.ApiCode.MissingModificationOfPersonalParameters))
 		return
 	}
-	// id, _ := jwt.GetAdminId(c)
-	// dto.Id = id
-	dto.Id= 3 // 测试写死数据
+	id, _ := jwt.GetAdminId(c)
+	dto.Id = id
 	result.Success(c, dao.UpdatePersonal(dto))
 }
 
@@ -136,25 +131,25 @@ func (s SysAdminServiceImpl) Login(c *gin.Context, dto entity.LoginDto) {
 		result.Failed(c, int(result.ApiCode.MissingLoginParameter), result.ApiCode.GetMessage(result.ApiCode.MissingLoginParameter))
 		return
 	}
-	// ip := c.ClientIP()
+	ip := c.ClientIP()
 	// 验证码是否过期
 	code := util.RedisStore{}.Get(dto.IdKey, true)
 	if len(code) == 0 {
-		// dao.CreateSysLoginInfo(dto.Username, ip, util.GetRealAddressByIP(ip), util.GetBrowser(c), util.GetOs(c), "验证码已过期", 2)
+		dao.CreateSysLoginInfo(dto.Username, ip, util.GetRealAddressByIP(ip), util.GetBrowser(c), util.GetOs(c), "验证码已过期", 2)
 		result.Failed(c, int(result.ApiCode.VerificationCodeHasExpired), result.ApiCode.GetMessage(result.ApiCode.VerificationCodeHasExpired))
 		return
 	}
 	// 校验验证码
 	verifyRes := CaptVerify(dto.IdKey, dto.Image)
 	if !verifyRes {
-		// dao.CreateSysLoginInfo(dto.Username, ip, util.GetRealAddressByIP(ip), util.GetBrowser(c), util.GetOs(c), "验证码不正确", 2)
+		dao.CreateSysLoginInfo(dto.Username, ip, util.GetRealAddressByIP(ip), util.GetBrowser(c), util.GetOs(c), "验证码不正确", 2)
 		result.Failed(c, int(result.ApiCode.CAPTCHANOTTRUE), result.ApiCode.GetMessage(result.ApiCode.CAPTCHANOTTRUE))
 		return
 	}
 	// 校验
 	sysAdmin := dao.SysAdminDetail(dto)
 	if sysAdmin.Password != util.EncryptionMd5(dto.Password) {
-		// dao.CreateSysLoginInfo(dto.Username, ip, util.GetRealAddressByIP(ip), util.GetBrowser(c), util.GetOs(c), "密码不正确", 2)
+		dao.CreateSysLoginInfo(dto.Username, ip, util.GetRealAddressByIP(ip), util.GetBrowser(c), util.GetOs(c), "密码不正确", 2)
 		result.Failed(c, int(result.ApiCode.PASSWORDNOTTRUE), result.ApiCode.GetMessage(result.ApiCode.PASSWORDNOTTRUE))
 		return
 	}
@@ -162,13 +157,13 @@ func (s SysAdminServiceImpl) Login(c *gin.Context, dto entity.LoginDto) {
 	// 状态 账号已停用
 	const status int = 2
 	if sysAdmin.Status == status {
-		// dao.CreateSysLoginInfo(dto.Username, ip, util.GetRealAddressByIP(ip), util.GetBrowser(c), util.GetOs(c), "账号已停用", 2)
+		dao.CreateSysLoginInfo(dto.Username, ip, util.GetRealAddressByIP(ip), util.GetBrowser(c), util.GetOs(c), "账号已停用", 2)
 		result.Failed(c, int(result.ApiCode.STATUSISENABLE), result.ApiCode.GetMessage(result.ApiCode.STATUSISENABLE))
 		return
 	}
 	// 生成token
 	tokenString, _ := jwt.GenerateTokenByAdmin(sysAdmin)
-	// dao.CreateSysLoginInfo(dto.Username, ip, util.GetRealAddressByIP(ip), util.GetBrowser(c), util.GetOs(c), "登录成功", 1)
+	dao.CreateSysLoginInfo(dto.Username, ip, util.GetRealAddressByIP(ip), util.GetBrowser(c), util.GetOs(c), "登录成功", 1)
 	
 	// 左侧菜单列表
 	var leftMenuVo []entity.LeftMenuVo

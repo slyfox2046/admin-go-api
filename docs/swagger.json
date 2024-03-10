@@ -1335,6 +1335,154 @@
                 }
             }
         },
+        "/api/sysLoginInfo/batch/delete": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "批量删除登录日志接口",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "批量删除登录日志接口",
+                "parameters": [
+                    {
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.DelSysLoginInfoDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/sysLoginInfo/clean": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "清空登录日志接口",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "清空登录日志接口",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/sysLoginInfo/delete": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据ID删除登录日志接口",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "根据ID删除登录日志接口",
+                "parameters": [
+                    {
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.SysLoginInfoIdDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/sysLoginInfo/list": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "分页获取登录日志列表接口",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "分页获取登录日志列表接口",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "分页数",
+                        "name": "pageNum",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "每页数",
+                        "name": "pageSize",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户名",
+                        "name": "username",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "登录状态（1-成功 2-失败）",
+                        "name": "loginStatus",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "开始时间",
+                        "name": "beginTime",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "结束时间",
+                        "name": "endTime",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
         "/api/upload": {
             "post": {
                 "security": [
@@ -1445,6 +1593,18 @@
                 "status": {
                     "description": "状态：1-\u003e启用,2-\u003e禁用",
                     "type": "integer"
+                }
+            }
+        },
+        "entity.DelSysLoginInfoDto": {
+            "type": "object",
+            "properties": {
+                "ids": {
+                    "description": "Id列表",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
                 }
             }
         },
@@ -1572,6 +1732,15 @@
             }
         },
         "entity.SysDeptIdDto": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "ID",
+                    "type": "integer"
+                }
+            }
+        },
+        "entity.SysLoginInfoIdDto": {
             "type": "object",
             "properties": {
                 "id": {

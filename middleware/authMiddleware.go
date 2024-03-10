@@ -4,6 +4,7 @@ package middleware
 import (
 	"admin-go-api/common/constant"
 	"admin-go-api/common/result"
+	"admin-go-api/pkg/jwt"
 	"strings"
 	"github.com/gin-gonic/gin"
 )
@@ -22,9 +23,13 @@ func AuthMiddleware() func(c *gin.Context) {
 			c.Abort()
 			return
 		}
-		// todo 检验token
-		var token = "token"
-		c.Set(constant.ContextKeyUserObj, token)
+		mc, err := jwt.ValidateToken(parts[1])
+		if err != nil {
+			result.Failed(c, int(result.ApiCode.INVALIDTOKEN), result.ApiCode.GetMessage(result.ApiCode.INVALIDTOKEN))
+			c.Abort()
+			return
+		}
+		c.Set(constant.ContextKeyUserObj, mc)
 		c.Next()
 	}
 }

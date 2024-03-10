@@ -1483,6 +1483,148 @@
                 }
             }
         },
+        "/api/sysOperationLog/batch/delete": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "批量删除操作日志接口",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "批量删除操作日志接口",
+                "parameters": [
+                    {
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.BatchDeleteSysOperationLogDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/sysOperationLog/clean": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "清空操作日志接口",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "清空操作日志接口",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/sysOperationLog/delete": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据id删除操作日志",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "根据id删除操作日志",
+                "parameters": [
+                    {
+                        "description": "data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.SysOperationLogIdDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/sysOperationLog/list": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "分页获取操作日志列表接口",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "分页获取操作日志列表接口",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "每页数",
+                        "name": "pageSize",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "分页数",
+                        "name": "pageNum",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户名",
+                        "name": "username",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "开始时间",
+                        "name": "beginTime",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "结束时间",
+                        "name": "endTime",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/result.Result"
+                        }
+                    }
+                }
+            }
+        },
         "/api/upload": {
             "post": {
                 "security": [
@@ -1593,6 +1735,18 @@
                 "status": {
                     "description": "状态：1-\u003e启用,2-\u003e禁用",
                     "type": "integer"
+                }
+            }
+        },
+        "entity.BatchDeleteSysOperationLogDto": {
+            "type": "object",
+            "properties": {
+                "ids": {
+                    "description": "id列表",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
                 }
             }
         },
@@ -1806,6 +1960,15 @@
             }
         },
         "entity.SysMenuIdDto": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "ID",
+                    "type": "integer"
+                }
+            }
+        },
+        "entity.SysOperationLogIdDto": {
             "type": "object",
             "properties": {
                 "id": {

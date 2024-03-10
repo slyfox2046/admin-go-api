@@ -57,6 +57,14 @@ definitions:
         description: 状态：1->启用,2->禁用
         type: integer
     type: object
+  entity.BatchDeleteSysOperationLogDto:
+    properties:
+      ids:
+        description: id列表
+        items:
+          type: integer
+        type: array
+    type: object
   entity.DelSysLoginInfoDto:
     properties:
       ids:
@@ -203,6 +211,12 @@ definitions:
         type: string
     type: object
   entity.SysMenuIdDto:
+    properties:
+      id:
+        description: ID
+        type: integer
+    type: object
+  entity.SysOperationLogIdDto:
     properties:
       id:
         description: ID
@@ -1293,6 +1307,93 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: 分页获取登录日志列表接口
+  /api/sysOperationLog/batch/delete:
+    delete:
+      description: 批量删除操作日志接口
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.BatchDeleteSysOperationLogDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      security:
+      - ApiKeyAuth: []
+      summary: 批量删除操作日志接口
+  /api/sysOperationLog/clean:
+    delete:
+      description: 清空操作日志接口
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      security:
+      - ApiKeyAuth: []
+      summary: 清空操作日志接口
+  /api/sysOperationLog/delete:
+    delete:
+      description: 根据id删除操作日志
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.SysOperationLogIdDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      security:
+      - ApiKeyAuth: []
+      summary: 根据id删除操作日志
+  /api/sysOperationLog/list:
+    get:
+      description: 分页获取操作日志列表接口
+      parameters:
+      - description: 每页数
+        in: query
+        name: pageSize
+        type: integer
+      - description: 分页数
+        in: query
+        name: pageNum
+        type: integer
+      - description: 用户名
+        in: query
+        name: username
+        type: string
+      - description: 开始时间
+        in: query
+        name: beginTime
+        type: string
+      - description: 结束时间
+        in: query
+        name: endTime
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/result.Result'
+      security:
+      - ApiKeyAuth: []
+      summary: 分页获取操作日志列表接口
   /api/upload:
     post:
       consumes:

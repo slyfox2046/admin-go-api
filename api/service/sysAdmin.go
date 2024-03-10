@@ -183,15 +183,14 @@ func (s SysAdminServiceImpl) Login(c *gin.Context, dto entity.LoginDto) {
 		item.Url = value.Url
 		leftMenuVo = append(leftMenuVo, item)
 	}
-	// // 权限列表
-	// permissionList := dao.QueryPermissionList(sysAdmin.ID)
-	// var stringList = make([]string, 0)
-	// for _, value := range permissionList {
-	// 	stringList = append(stringList, value.Value)
-	// }
-	// result.Success(c, map[string]interface{}{"token": tokenString, "sysAdmin": sysAdmin, "leftMenuList": leftMenuVo, "permissionList": stringList})
+	// 权限列表
+	permissionList := dao.QueryPermissionList(sysAdmin.ID)
+	var stringList = make([]string, 0)
+	for _, value := range permissionList {
+		stringList = append(stringList, value.Value)
+	}
+	result.Success(c, map[string]interface{}{"token": tokenString, "sysAdmin": sysAdmin, "leftMenuList": leftMenuVo, "permissionList": stringList})
 	
-	result.Success(c, map[string]interface{}{"token": tokenString, "sysAdmin": sysAdmin,"leftMenuList":leftMenuVo})
 }
 
 var sysAdminService = SysAdminServiceImpl{}

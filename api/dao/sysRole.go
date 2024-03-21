@@ -108,12 +108,12 @@ func QuerySysRoleVoList() (sysRoleVo []entity.SysRoleVo) {
 
 // QueryRoleMenuIdList 根据角色的id查询菜单权限数据列表
 func QueryRoleMenuIdList(Id int) (idVo []entity.IdVo) {
-	const menuType int = 3
+	// const menuType int = 3 //这里注释
 	Db.Table("sys_menu sm").
 		Select("sm.id").
 		Joins("LEFT JOIN sys_role_menu srm ON srm.menu_id = sm.id").
 		Joins("LEFT JOIN sys_role sr ON sr.id = srm.role_id").
-		Where("sm.menu_type = ?", menuType).
+		// Where("sm.menu_type != ?", menuType).
 		Where("sr.id = ?", Id).
 		Scan(&idVo)
 	return idVo

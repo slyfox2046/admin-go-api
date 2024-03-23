@@ -19,8 +19,10 @@ func InitRouter() *gin.Engine {
 	// 跌机恢复
 	router.Use(gin.Recovery())
 	router.Use(middleware.Cors())
-	router.StaticFS(config.Config.ImageSettings.UploadDir, http.Dir(config.Config.ImageSettings.UploadDir))
+	// router.StaticFS(config.Config.ImageSettings.UploadDir, http.Dir(config.Config.ImageSettings.UploadDir))
+	router.StaticFS(config.Config.ImageSettings.UploadDir, http.Dir(config.Config.ImageSettings.MyUploadDir))
 	router.Use(middleware.Logger())
+
 	register(router)
 	return router
 }
